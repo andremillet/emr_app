@@ -1,0 +1,6 @@
+# requirements.txt
+flask==2.3.3
+psycopg[binary]==3.2.6
+python-dotenv==1.0.1
+flask-jwt-extended==4.6.0
+bcrypt==4.2.0
