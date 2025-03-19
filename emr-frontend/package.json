@@ -1,7 +1,7 @@
 {
   "name": "emr-frontend",
   "version": "0.1.0",
-  "homepage": https://emr-app-4jan.onrender.com
+  "homepage":"https://<your_render_url>/", 
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
