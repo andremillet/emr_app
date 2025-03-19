@@ -3,8 +3,8 @@ services:
   - type: web
     name: emr-frontend
     env: static
-    buildCommand: npm install && npm run build
-    staticPublishPath: build
+    buildCommand: cd emr-frontend && npm install && npm run build  # Adjust if repo root
+    staticPublishPath: emr-frontend/build  # Adjust if repo root
     routes:
       - type: rewrite
         source: /*
