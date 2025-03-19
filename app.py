@@ -15,7 +15,7 @@ def create_app():
     app.config['JWT_SECRET_KEY'] = Config.SECRET_KEY
     
     # Enable CORS for local dev and Render frontend (adjust origins as needed)
-    CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://emr-frontend-o4mv.onrender.com/"]}})
+    CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://emr-frontend-o4mv.onrender.com/", "https://emr-app-4jan.onrender.com/"]}})
     
     jwt = JWTManager(app)
     
