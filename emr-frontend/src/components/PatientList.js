@@ -1,8 +1,8 @@
-// src/components/PatientList.js
+// emr_app/emr-frontend/src/components/PatientList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function PatientList({ token }) {
+function PatientList({ token, onPatientClick }) {
   const [patients, setPatients] = useState([]);
   const [error, setError] = useState('');
 
@@ -19,9 +19,8 @@ function PatientList({ token }) {
       }
     };
     fetchPatients();
-    // Optional: Poll every 5 seconds (remove if real-time not needed)
     const interval = setInterval(fetchPatients, 5000);
-    return () => clearInterval(interval); // Cleanup
+    return () => clearInterval(interval);
   }, [token]);
 
   return (
@@ -30,7 +29,7 @@ function PatientList({ token }) {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
         {patients.map((patient) => (
-          <li key={patient.patient_id}>
+          <li key={patient.patient_id} onClick={() => onPatientClick(patient.patient_id)} style={{ cursor: 'pointer' }}>
             {patient.full_name} - CPF: {patient.cpf}
           </li>
         ))}

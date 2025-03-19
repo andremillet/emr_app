@@ -1,9 +1,10 @@
-// src/App.js
+// emr_app/emr-frontend/src/App.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode'; // Changed to named import
+import { jwtDecode } from 'jwt-decode';
 import PatientList from './components/PatientList';
 import PatientForm from './components/PatientForm';
+import PatientDetails from './components/PatientDetails';
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [selectedPatientId, setSelectedPatientId] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,6 +33,15 @@ function App() {
   const handleLogout = () => {
     setToken('');
     localStorage.removeItem('token');
+    setSelectedPatientId(null);
+  };
+
+  const handlePatientClick = (patientId) => {
+    setSelectedPatientId(patientId);
+  };
+
+  const handleBack = () => {
+    setSelectedPatientId(null);
   };
 
   const decodedToken = token ? jwtDecode(token) : null;
@@ -64,8 +75,14 @@ function App() {
         <>
           <p>Welcome, {username} ({userRole})</p>
           <button onClick={handleLogout}>Logout</button>
-          <PatientList token={token} />
-          {userRole === 'admin' && <PatientForm token={token} />}
+          {selectedPatientId ? (
+            <PatientDetails token={token} patientId={selectedPatientId} onBack={handleBack} />
+          ) : (
+            <>
+              <PatientList token={token} onPatientClick={handlePatientClick} />
+              {userRole === 'admin' && <PatientForm token={token} />}
+            </>
+          )}
         </>
       )}
     </div>
