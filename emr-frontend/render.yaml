@@ -1,10 +1,10 @@
-# render.yaml
+# render.yaml (in emr_app/)
 services:
   - type: web
     name: emr-frontend
     env: static
-    buildCommand: cd emr-frontend && npm install && npm run build  # Adjust if repo root
-    staticPublishPath: emr-frontend/build  # Adjust if repo root
+    buildCommand: cd emr_frontend && npm install && npm run build
+    staticPublishPath: emr_frontend/build
     routes:
       - type: rewrite
         source: /*
